@@ -252,7 +252,7 @@ export default function Post({ page, blocks }) {
                className="w-max flex items-center my-6 md:my-12 md:mt-16 relative text-gray-400"
             >
                <div className="relative mr-8 hover:underline transition">
-                  ← Zpět na seznam
+                  ← Zpět
                </div>
                <h1 className="text-xl hover:underline">Martin Kučera</h1>
             </Link>
