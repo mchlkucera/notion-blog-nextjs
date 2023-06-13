@@ -258,7 +258,7 @@ export default function Post({ page, blocks }) {
             </Link>
 
             <article className="article">
-               <h1 className="text-xl !my-4 font-medium">
+               <h1 className="text-xl !my-8 font-medium">
                   <Text text={page.properties.Name.title} />
                </h1>
                <section className="">
