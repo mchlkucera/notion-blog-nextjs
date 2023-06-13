@@ -216,7 +216,26 @@ export default function Post({ page, blocks }) {
    const year = new Date().getFullYear();
 
    if (!page || !blocks) {
-      return <div />;
+      return (
+         <div>
+            <Head>
+               <title>Martin Kučera</title>
+               <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main className="max-w-2xl mx-auto px-4">
+               <Link
+                  href="/"
+                  className="w-max flex items-center my-6 md:my-12 md:mt-16 relative text-gray-400"
+               >
+                  <div className="relative mr-8 hover:underline transition">
+                     ← Zpět na seznam
+                  </div>
+                  <h1 className="text-xl hover:underline">Martin Kučera</h1>
+               </Link>
+               <div>Článek nenalezen. Byl buď přejmenován neb odstraněn.</div>
+            </main>
+         </div>
+      );
    }
 
    return (
@@ -230,10 +249,10 @@ export default function Post({ page, blocks }) {
          <main className="max-w-2xl mx-auto px-4">
             <Link
                href="/"
-               className="mx-auto w-max flex items-center my-4 md:my-8 md:mt-16 relative"
+               className="w-max flex items-center my-6 md:my-12 md:mt-16 relative text-gray-400"
             >
-               <div className="relative mr-8 text-gray-400 hover:underline transition">
-                  ← Zpět
+               <div className="relative mr-8 hover:underline transition">
+                  ← Zpět na seznam
                </div>
                <h1 className="text-xl hover:underline">Martin Kučera</h1>
             </Link>
@@ -269,7 +288,7 @@ export const getStaticPaths = async () => {
    };
 };
 
-function getPageSlug(page) {
+export function getPageSlug(page) {
    const title = page.properties.Name.title[0].plain_text;
    const convertedString = title
       .toLowerCase()
@@ -281,23 +300,34 @@ function getPageSlug(page) {
 }
 
 export const getStaticProps = async (context) => {
-   const { id } = context.params;
-   const database = await getDatabase(databaseId);
+   try {
+      const { id } = context.params;
+      const database = await getDatabase(databaseId);
 
-   const foundPostSlug = database.find((page) => {
-      return getPageSlug(page) === id;
-   });
+      const foundPostSlug = database.find((page) => {
+         return getPageSlug(page) === id;
+      });
 
-   let pageId = id;
-   if (foundPostSlug) pageId = foundPostSlug.id;
-   const page = await getPage(pageId);
-   const blocks = await getBlocks(pageId);
+      let pageId = id;
+      if (foundPostSlug) pageId = foundPostSlug.id;
+      const page = await getPage(pageId);
+      const blocks = await getBlocks(pageId);
 
-   return {
-      props: {
-         page,
-         blocks,
-      },
-      revalidate: 1,
-   };
+      return {
+         props: {
+            page,
+            blocks,
+         },
+         revalidate: 1,
+      };
+   } catch (e) {
+      console.log(e);
+      return {
+         props: {
+            page: null,
+            blocks: null,
+         },
+         revalidate: 1,
+      };
+   }
 };
