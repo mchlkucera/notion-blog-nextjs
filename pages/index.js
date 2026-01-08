@@ -19,7 +19,7 @@ export default function Home({ posts }) {
             <link rel="icon" href="/favicon.ico" />
          </Head>
 
-         <main className="m-auto max-w-2xl ">
+         <main className="m-auto max-w-2xl px-4">
             <header className="my-8 mt-16 text-gray-400">
                <Link className="text-xl hover:underline" href="/">
                   Martin Kučera
