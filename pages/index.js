@@ -27,21 +27,23 @@ export default function Home({ posts }) {
             </header>
 
             <div className="flex flex-col gap-2">
-               {posts.map((post) => {
+               {posts.map((post, index) => {
                   const date = new Date(post.last_edited_time).toLocaleString(
                      "cs-CZ",
                      dateOptions
                   );
+                  const articleNumber = posts.length - index;
                   return (
                      <Link
                         href={"/" + getPageSlug(post)}
                         key={post.id}
-                        className="rounded border border-gray-200 p-4 hover:bg-gray-100 transition flex items-center justify-between focus:outline focus:outline-2"
+                        className="rounded border border-gray-200 p-4 hover:bg-gray-100 transition flex items-center justify-between gap-4 focus:outline focus:outline-2"
                      >
-                        <h3 className="">
+                        <h3 className="flex items-center gap-2 flex-1 min-w-0">
+                           <span className="text-sm text-gray-400">{articleNumber}.</span>
                            <Text text={post.properties.Name.title} />
                         </h3>
-                        <p className="text-gray-400">{date}</p>
+                        <p className="text-xs text-gray-400 flex-shrink-0 text-right">{date}</p>
                      </Link>
                   );
                })}
