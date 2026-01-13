@@ -1,38 +1,76 @@
-This is a [Next.js](https://nextjs.org/) blog using [Notions Public API](https://developers.notion.com).
+# Martin Kučera's Blog
 
-__Demo:__ [https://notion-blog-nextjs-coral.vercel.app](https://notion-blog-nextjs-coral.vercel.app)
+Personal blog built with Next.js and Notion as a CMS. All content is written and managed in Notion, then automatically published to the web.
 
-__How-it-works/Documentation:__ [https://samuelkraft.com/blog/building-a-notion-blog-with-public-api](https://samuelkraft.com/blog/building-a-notion-blog-with-public-api)
+## Tech Stack
 
-## Getting Started
+- **Next.js 13** - React framework with SSG and ISR
+- **Notion API** - Content management and storage
+- **Tailwind CSS** - Styling and responsive design
+- **Vercel** - Hosting and deployment
 
-First, follow Notions [getting started guide](https://developers.notion.com/docs/getting-started) to get a `NOTION_TOKEN` and a `NOTION_DATABASE_ID`, then add them to a file called `.env.local`.
+## Features
 
-As a reference here's the Notion table I am using: https://www.notion.so/f30f2af70c6b4e809af31936989fab56?v=0a3b3a69341441ccbd14f8ccb403b2c4
+- Articles automatically sorted by creation date (newest first)
+- Sequential article numbering
+- Responsive design optimized for mobile
+- Incremental Static Regeneration (revalidates every second)
+- Czech language support
 
+## Local Development
+
+### Prerequisites
+
+- Node.js 20 or higher
+- Notion account with API access
+
+### Setup
+
+1. Clone the repository
+2. Create a `.env.local` file with your Notion credentials:
+
+```bash
+NOTION_TOKEN=your_notion_integration_token
+NOTION_DATABASE_ID=your_database_id
 ```
-NOTION_TOKEN=
-NOTION_DATABASE_ID=
-```
 
-Install dependencies
+To get these values, follow [Notion's getting started guide](https://developers.notion.com/docs/getting-started).
+
+3. Install dependencies:
 
 ```bash
 npm install
-# or
-yarn
 ```
 
-Start the server with
+4. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the blog.
 
-#### Deploy to vercel
+## Notion Database
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fsamuelkraft%2Fnotion-blog-nextjs&env=NOTION_TOKEN,NOTION_DATABASE_ID&envDescription=Please%20add%20NOTION_TOKEN%20and%20NOTION_DATABASE_ID%20that%20is%20required%20to%20connect%20the%20blog%20to%20your%20notion%20account.&envLink=https%3A%2F%2Fdevelopers.notion.com%2Fdocs%2Fgetting-started&project-name=notion-blog-nextjs&repo-name=notion-blog-nextjs&demo-title=Notion%20Blog%20Next%20JS&demo-description=%20This%20is%20a%20Next.js%20blog%20using%20Notions%20Public%20API.&demo-url=notion-blog-nextjs-coral.vercel.app)
+The blog content is managed in this Notion database:
+https://www.notion.so/f30f2af70c6b4e809af31936989fab56?v=0a3b3a69341441ccbd14f8ccb403b2c4
+
+### Database Schema
+
+- **Name** (title) - Article title
+- **Created time** (date) - Publication date (used for sorting)
+
+## Deployment
+
+Deployed on Vercel with automatic deployments from the `master` branch.
+
+## Project Structure
+
+- `pages/index.js` - Homepage with article list
+- `pages/[id].js` - Individual article pages
+- `lib/notion.js` - Notion API integration
+- `styles/globals.css` - Global styles and article typography
+
+## MCP Configuration
+
+This project uses Claude Code's MCP (Model Context Protocol) for enhanced development workflow. The Notion MCP server is configured in `.mcp.json` for direct integration with the Notion API during development.
