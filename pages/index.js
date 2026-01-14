@@ -32,7 +32,7 @@ export default function Home({ posts }) {
                      "cs-CZ",
                      dateOptions
                   );
-                  const articleNumber = posts.length - index;
+                  const articleNumber = index + 1;
                   return (
                      <Link
                         href={"/" + getPageSlug(post)}
